@@ -1,6 +1,6 @@
 package kz.govtech.m11s.sb_gbdul_report_3007_service.clients.kdp;
 
-import kz.govtech.m11s.sb_gbdul_report_3005_service.clients.kdp.dto.KdpToken;
+import kz.govtech.m11s.sb_gbdul_report_3007_service.clients.kdp.dto.KdpToken;
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;

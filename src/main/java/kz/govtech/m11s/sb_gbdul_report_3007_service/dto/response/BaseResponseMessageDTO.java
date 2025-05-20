@@ -1,7 +1,7 @@
 package kz.govtech.m11s.sb_gbdul_report_3007_service.dto.response;
 
 import io.swagger.v3.oas.annotations.media.Schema;
-import kz.govtech.m11s.sb_gbdul_report_3005_service.dto.common.StatusTypeDTO;
+import kz.govtech.m11s.sb_gbdul_report_3007_service.dto.common.StatusTypeDTO;
 import lombok.Data;
 
 import java.time.LocalDateTime;
