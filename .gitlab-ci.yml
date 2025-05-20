@@ -1,0 +1,7 @@
+include:
+  - project: $CI_PIPELINE_PATH
+    file: 'cicd.yaml'
+    ref: 'govtech'
+
+variables:
+  NAMESPACE: eub-adapters

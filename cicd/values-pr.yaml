@@ -1,0 +1,83 @@
+image:
+  repository: IMAGE_NAME # must be IMAGE_NAME
+  pullPolicy: IfNotPresent
+  tag: IMAGE_TAG # must be IMAGE_TAG
+imagePullSecrets:
+  - name: harbor-cred # must be harbor-cred
+nameOverride: ""
+fullnameOverride: &app_name "APP_NAME"
+trimmedFullnameOverride: "TRIMMED_FULLNAMEOVERRIDE"
+namespace: dev-eub-adapters # must be dev-eub-adapters
+annotations:
+  sidecarIstio: 'true'
+janitor:
+  annotations:
+    janitor/ttl: 10m
+labels:
+  app: *app_name
+  domain: adapter
+configmap:
+  enabled: true
+  configmapdata:
+    SHEP_IS_IGNORE_WSS: "true"
+    SHEP_IS_WSS_USING: "true"
+    SHEP_SERVICE_ID: "GbdulReport3007_KDP"
+    SHEP_SIGN_KEY_PATH: "/app/cert/gost.p12"
+    SHEP_URL: "https://vshep-t.egov.kz/bip-sync-wss-gost/"
+    MANAGEMENT_ENDPOINTS_WEB_EXPOSURE_INCLUDE: "health,prometheus"
+    MANAGEMENT_HEALTH_PROBES_ENABLED: "true"
+    SERVER_PORT: "8080"
+    LOG_CONFIG_JSON_LOGGING: "false"
+    LOG_CONFIG_MASK_SENSITIVE_DATA: "true"
+    LOGBOOK_FORMAT_STYLE: "http"
+    CLIENTS_KDP_SERVICE_BASE_URL: "http://kdp-service.eub-adapters.svc.cluster.local:8080"
+
+service:
+  name: http
+  type: ClusterIP
+  port: 8080
+  targetPort: 8080
+secrets:
+  enabled: false
+route:
+  enabled: true
+  host: APP_NAME.apps.osh-clk01-test.eub.kz
+serviceAccount:
+  create: false
+strategy:
+  type: RollingUpdate
+  rollingUpdate:
+    maxUnavailable: 25%
+    maxSurge: 25%
+podAnnotations: { }
+podSecurityContext: { }
+securityContext: { }
+livenessProbe:
+  enabled: false
+readinessProbe:
+  enabled: false
+resources:
+  limits:
+    cpu: 400m
+    memory: 512Mi
+  requests:
+    cpu: 50m
+    memory: 128Mi
+autoscaling:
+  enabled: false
+  minReplicas: 1
+  maxReplicas: 1
+  targetCPUUtilizationPercentage: 80
+  targetMemoryUtilizationPercentage: 80
+replicaCount: 1
+nodeSelector: { }
+tolerations: [ ]
+affinity: { }
+servicemonitor:
+  interval: 30s
+  path: /actuator/prometheus
+  port: http
+  scheme: http
+vault:
+  enabled: true
+  mount: eub-adapters

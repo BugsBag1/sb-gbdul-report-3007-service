@@ -1,0 +1,103 @@
+image:
+  repository: "IMAGE_NAME"
+  pullPolicy: IfNotPresent
+  tag: "IMAGE_TAG"
+
+imagePullSecrets:
+  - name: nexus-cred
+
+nameOverride: ""
+fullnameOverride: &app_name "sb-gbdul-report-3007-service"
+namespace: eub-adapters
+
+annotations:
+  sidecarIstio: 'true'
+
+labels:
+  app: *app_name
+  domain: adapter
+
+configmap:
+  enabled: true
+  configmapdata:
+    SHEP_IS_IGNORE_WSS: "true"
+    SHEP_IS_WSS_USING: "true"
+    SHEP_SERVICE_ID: "GbdulReport3007_KDP"
+    SHEP_SIGN_KEY_PATH: "/app/cert/gost.p12"
+    SHEP_URL: "https://vshep.egov.kz/bip-sync-wss-gost/"
+    MANAGEMENT_ENDPOINTS_WEB_EXPOSURE_INCLUDE: "health,prometheus"
+    MANAGEMENT_HEALTH_PROBES_ENABLED: "true"
+    SERVER_PORT: "8080"
+    LOG_CONFIG_JSON_LOGGING: "true"
+    LOG_CONFIG_MASK_SENSITIVE_DATA: "true"
+    CLIENTS_KDP_SERVICE_BASE_URL: "http://kdp-service.eub-adapters.svc.cluster.local:8080"
+
+service:
+  name: http
+  type: ClusterIP
+  port: 8080
+  targetPort: 8080
+
+secrets:
+  enabled: false
+
+route:
+  enabled: false
+
+serviceAccount:
+  create: false
+
+strategy:
+  type: RollingUpdate
+  rollingUpdate:
+    maxUnavailable: 25%
+    maxSurge: 25%
+
+podAnnotations: { }
+
+podSecurityContext: { }
+
+securityContext: { }
+
+livenessProbe:
+  enabled: true
+  httpGet:
+    path: /actuator/health/liveness
+    port: 8080
+  initialDelaySeconds: 60
+readinessProbe:
+  enabled: true
+  httpGet:
+    path: /actuator/health/readiness
+    port: 8080
+  initialDelaySeconds: 60
+
+resources:
+  limits:
+    cpu: 400m
+    memory: 512Mi
+  requests:
+    cpu: 200m
+    memory: 256Mi
+
+autoscaling:
+  enabled: false
+  minReplicas: 1
+  maxReplicas: 2
+  targetCPUUtilizationPercentage: 80
+  targetMemoryUtilizationPercentage: 80
+replicaCount: 1
+
+nodeSelector: { }
+tolerations: [ ]
+
+affinity: { }
+
+servicemonitor:
+  interval: 30s
+  path: /actuator/prometheus
+  port: http
+  scheme: http
+vault:
+  enabled: true
+

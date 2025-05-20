@@ -1,0 +1,66 @@
+api-prefix: /api/v1/internal
+
+server:
+  servlet:
+    encoding:
+      charset: UTF-8
+      force-response: true
+
+clients:
+  kdp-service:
+    base-url:
+
+management:
+  endpoints:
+    web:
+      base-path: /actuator
+      exposure:
+        include: health,prometheus,metrics
+      path-mapping.prometheus: prometheus
+  endpoint:
+    health:
+      show-details: always
+      probes:
+        enabled: true
+    metrics:
+      enabled: true
+    prometheus:
+      enabled: true
+      cache.time-to-live: 1ms
+
+log-config:
+  mask-sensitive-data: true
+  json-logging: true
+  level: "INFO"
+
+logging:
+  level:
+    org.zalando.logbook: TRACE
+
+logbook:
+  exclude:
+    - "/swagger-ui/**"
+    - "/actuator/**"
+    - "/v2/api-docs"
+    - "/swagger-resources/**"
+    - "/favicon.ico"
+  obfuscate:
+    headers:
+      - Authorization
+      - kdp-token
+    parameters:
+      - access_token
+      - password
+  attribute-extractors:
+    - type: JwtFirstMatchingClaimExtractor
+      claim-names: [ "clientId", "sub", "subject" ]
+      claim-key: Principal
+    - type: JwtAllMatchingClaimsExtractor
+      claim-names: [ "sub", "iat", "clientId" ]
+
+springdoc:
+  override-with-generic-response: false
+
+request-data:
+  requestor-bin: "950240000112"
+  request-system-id: "Govtech"
