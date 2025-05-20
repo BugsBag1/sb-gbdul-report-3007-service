@@ -1,10 +1,12 @@
 package kz.govtech.m11s.sb_gbdul_report_3007_service.dto.common;
 
 import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.Data;
 
 import java.time.LocalDate;
 import java.util.List;
 
+@Data
 public class OrganizationTypeDTO {
     @Schema(description = "1-юрлицо 2-филиал 3-представительство")
     private Integer orgFormCode;
