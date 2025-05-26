@@ -23,7 +23,7 @@ import javax.validation.constraints.Size;
 public class AppController {
     private final AppService appService;
 
-    @Operation(summary = "Сервис получения справки по услуге «Справка о всех регистрационных действиях ЮЛ» с КДП")
+    @Operation(summary = "Сервис получения справки по услуге «Справка о последних внесенных изменениях в учредительные документы» с КДП")
     @ApiResponses(value = {
         @ApiResponse(responseCode = "200", description = "Successful operation"),
         @ApiResponse(
@@ -66,7 +66,7 @@ public class AppController {
     })
 
     @GetMapping
-    public ResponseDTO getReport3005(
+    public ResponseDTO getReport3007(
         @Parameter(description = "БИН организации, для которой запрашивается справка") @Size(min = 12, max = 12)
         @RequestParam String bin,
         @Parameter(description = "ИИН физического лица (необязательный параметр)", required = false)

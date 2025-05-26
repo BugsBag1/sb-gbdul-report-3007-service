@@ -36,7 +36,7 @@ public class AppService {
     private final Converter converter;
     private final SyncShepClient shepClient;
     private final AppConstants appConstants;
-    private static final String SERVICE_ID = "GbdulAffilFace_KDP";
+    private static final String SERVICE_ID = "GbdulReport3007_KDP";
     private final static String STATUS_SUCCESS = "SCSS001";
     private final static String STATUS_NOT_FOUND = "404";
 

@@ -22,7 +22,7 @@
 		<checkstyle.version>3.2.0</checkstyle.version>
 		<checkstyle.config.location>m11s-checkstyle.xml</checkstyle.config.location>
 		<puppycrawl.version>8.19</puppycrawl.version>
-		<shep-client.version>1.45-SNAPSHOT</shep-client.version>
+		<shep-client.version>1.51-SNAPSHOT</shep-client.version>
 		<shep-shared.version>1.11-SNAPSHOT</shep-shared.version>
 		<app-config-data.version>1.24-SNAPSHOT</app-config-data.version>
 		<validation-shared.version>1.14-SNAPSHOT</validation-shared.version>

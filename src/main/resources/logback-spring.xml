@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <include resource="logback-common.xml"/>
+
+    <logger name="org.zalando.logbook" level="TRACE" additivity="false">
+        <appender-ref ref="STDOUT"/>
+    </logger>
+</configuration>

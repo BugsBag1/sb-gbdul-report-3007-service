@@ -5,7 +5,6 @@ import kz.govtech.m11s.sb_gbdul_report_3007_service.dto.RequestDTO;
 import kz.govtech.m11s.sb_gbdul_report_3007_service.dto.ResponseDTO;
 import kz.govtech.m11s.sb_gbdul_report_3007_service.mapper.RequestMapper;
 import kz.govtech.m11s.sb_gbdul_report_3007_service.mapper.ResponseMapper;
-import kz.govtech.m11s.sb_gbdul_report_3007_service.xsd.RequestAndResponse.ObjectFactory;
 import kz.govtech.m11s.sb_gbdul_report_3007_service.xsd.RequestAndResponse.Request;
 import kz.govtech.m11s.sb_gbdul_report_3007_service.xsd.RequestAndResponse.Response;
 import kz.govtech.m11s.syncshepclient.dto.DataResponse;
